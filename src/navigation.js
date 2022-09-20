@@ -28,7 +28,6 @@ function navigator () {
 };
 
 function homePage () {
-    console.log('Home');
     window.scrollTo(0, 0);
 
     headerSection.classList.remove('header-container--long');
@@ -48,7 +47,6 @@ function homePage () {
     getCategoriesPreview();
 };
 function categoriesPage () {
-    console.log('categories');
     window.scrollTo(0, 0);
 
 
@@ -72,7 +70,6 @@ function categoriesPage () {
     getMoviesByCategory(categoryId);
 };
 function moviePage () {
-    console.log('movie');
     window.scrollTo(0, 0);
 
     headerSection.classList.add('header-container--long');
@@ -89,7 +86,6 @@ function moviePage () {
     movieDetailSection.classList.remove('inactive');
 };
 function searchPage () {
-    console.log('search');
     window.scrollTo(0, 0);
 
     headerSection.classList.remove('header-container--long');
@@ -109,7 +105,6 @@ function searchPage () {
     getMoviesBySearch(query);
 };
 function trendesgchPage () {
-    console.log('trendes');
     window.scrollTo(0, 0);
 
     headerSection.classList.remove('header-container--long');
@@ -124,4 +119,7 @@ function trendesgchPage () {
     categoriesPreviewSection.classList.add('inactive');
     genericListSection.classList.remove('inactive');
     movieDetailSection.classList.add('inactive');
+    headerCategoryTitle.innerHTML = 'Trends';
+
+    getTrendingMovies();
 };

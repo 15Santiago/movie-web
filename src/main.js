@@ -74,10 +74,20 @@ async function getMoviesByCategory (id) {
         console.log(error);
     }
 };
-
 async function getMoviesBySearch(query) {
     try {
         const response = await fetch (`${API}/search/movie?api_key=${API_Key}&&query=${query}`);
+        const data = await response.json();
+        const movies = data.results;
+
+        createMovies(movies, genericListSection);
+    } catch (error){
+        console.log(error);
+    }
+};
+async function getTrendingMovies () {
+    try {
+        const response = await fetch (`${API}/trending/movie/week?api_key=${API_Key}`);
         const data = await response.json();
         const movies = data.results;
 
