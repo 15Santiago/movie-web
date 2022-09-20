@@ -39,11 +39,38 @@ async function getCategoriesPreview () {
             const categoryTitle = document.createElement('h3');
             categoryTitle.classList.add('category-title');
             categoryTitle.setAttribute('id', `id${category.id}`);
+            categoryTitle.addEventListener('click', () => {
+                location.hash = `#category=${category.id}-${category.name}`;
+            });
             const categoryTitleText = document.createTextNode(category.name);
 
             categoryTitle.appendChild(categoryTitleText);
             categoryDiv.appendChild(categoryTitle);
             categoriesPreviewlist.appendChild(categoryDiv);
+        });
+    } catch (error){
+        console.log(error);
+    }
+};
+
+async function getMoviesByCategory (id) {
+    try {
+        const response = await fetch (`${API}/discover/movie?api_key=${API_Key}&&with_genres=${id}`);
+        const data = await response.json();
+        const movies = data.results;
+
+        genericListSection.innerHTML = '';
+        movies.forEach(movie => {
+            const imgContainer = document.createElement('div');
+            const img = document.createElement('img');
+
+            imgContainer.classList.add('movie-container');
+            img.classList.add('movie-img');
+            img.setAttribute('alt', movie.title);
+            img.setAttribute('src', `https://image.tmdb.org/t/p/w300/${movie.poster_path}`);
+
+            imgContainer.appendChild(img);
+            genericListSection.appendChild(imgContainer);
         });
     } catch (error){
         console.log(error);
