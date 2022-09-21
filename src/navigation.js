@@ -49,7 +49,6 @@ function homePage () {
 function categoriesPage () {
     window.scrollTo(0, 0);
 
-
     headerSection.classList.remove('header-container--long');
     headerSection.getElementsByClassName.background = '';
     arrowBtn.classList.remove('inactive');

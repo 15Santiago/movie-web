@@ -118,7 +118,19 @@ async function getMovieById (id) {
         movieDetailScore.textContent = `${movie.vote_average}`;
 
         createCategories(movie.genres, movieDetailCategoriesList);
+        getRelatedMoviesById(id);
     } catch (error){
         console.log(error);
     }
-} 
+}; 
+async function getRelatedMoviesById (id) {
+    try {
+        const response = await fetch (`${API}/movie/${id}/similar?api_key=${API_Key}`);
+        const movie = await response.json();
+        const relatedMovies = await movie.results;
+
+        createMovies(relatedMovies, relatedMoviesContainer);
+    } catch (error){
+        console.log(error);
+    }
+};
