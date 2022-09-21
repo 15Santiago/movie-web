@@ -84,6 +84,9 @@ function moviePage () {
     categoriesPreviewSection.classList.add('inactive');
     genericListSection.classList.add('inactive');
     movieDetailSection.classList.remove('inactive');
+
+    const [_, MvoieId] = location.hash.split('=');
+    getMovieById(MvoieId);
 };
 function searchPage () {
     window.scrollTo(0, 0);
