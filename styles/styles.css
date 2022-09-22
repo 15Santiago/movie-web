@@ -109,6 +109,7 @@ button {
 
 .movie-img {
   border-radius: 8px;
+  min-height: 175px;
 }
 
 .categoriesPreview-list, .categories-list {
@@ -119,6 +120,26 @@ button {
   flex-wrap: wrap;
 }
 
+.movie-container--loading {
+  background: var(--purple-dark-2);
+  border-radius: 8px;
+  height: 225px;
+  min-height: 225px;
+  max-height: 225px;
+  width: 150px;
+  min-width: 150px;
+  max-width: 150px;
+  margin-bottom: 15px;
+  animation: loading-skeleton infinite 1.5s;
+}
+
+.movie-container--loading:nth-child(2) {
+  animation-delay: .2s;
+}
+
+.movie-container--loading:nth-child(3) {
+  animation-delay: .2s;
+}
 
 /* Header */
 .header-container {
@@ -236,6 +257,24 @@ button {
   width: 8px;
   height: 8px;
 }
+
+.category-container--loading {
+  background: var(--purple-dark-2);
+  border-radius: 8px;
+  height: 25px;
+  min-height: 25px;
+  max-height: 25px;
+  width: 150px;
+  min-width: 150px;
+  max-width: 150px;
+  margin-bottom: 15px;
+  animation: loading-skeleton infinite 1.5s;
+}
+
+.category-container--loading:nth-child(2) {
+  animation-delay: .2s;
+}
+
 #id28 { --idColor: var(--yellow); }
 #id12 { --idColor: var(--red); }
 #id16 { --idColor: var(--green); }
@@ -346,4 +385,14 @@ button {
 /* Navigation */
 .inactive {
   display: none;
+}
+
+/* Animations */
+@keyframes loding-skeleton {
+  0%, 100% {
+    opacity: 100%;
+  }
+  50% {
+    opacity: 0%;
+  }
 }
