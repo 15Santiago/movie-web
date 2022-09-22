@@ -31,7 +31,7 @@ function homePage () {
     window.scrollTo(0, 0);
 
     headerSection.classList.remove('header-container--long');
-    headerSection.getElementsByClassName.background = '';
+    headerSection.style.background = '';
     arrowBtn.classList.add('inactive');
     arrowBtn.classList.remove('header-arrow--white');
     headerCategoryTitle.classList.add('inactive');
@@ -50,7 +50,7 @@ function categoriesPage () {
     window.scrollTo(0, 0);
 
     headerSection.classList.remove('header-container--long');
-    headerSection.getElementsByClassName.background = '';
+    headerSection.style.background = '';
     arrowBtn.classList.remove('inactive');
     arrowBtn.classList.remove('header-arrow--white');
     headerCategoryTitle.classList.remove('inactive');
@@ -91,7 +91,7 @@ function searchPage () {
     window.scrollTo(0, 0);
 
     headerSection.classList.remove('header-container--long');
-    // headerSection.getElementsByClassName.background = '';
+    headerSection.style.background = '';
     arrowBtn.classList.remove('inactive');
     arrowBtn.classList.remove('header-arrow--white');
     headerCategoryTitle.classList.add('inactive');
@@ -110,7 +110,7 @@ function trendesgchPage () {
     window.scrollTo(0, 0);
 
     headerSection.classList.remove('header-container--long');
-    // headerSection.getElementsByClassName.background = '';
+    headerSection.style.background = '';
     arrowBtn.classList.remove('inactive');
     arrowBtn.classList.remove('header-arrow--white');
     headerCategoryTitle.classList.add('inactive');
