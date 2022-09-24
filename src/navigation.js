@@ -1,3 +1,4 @@
+let maxPage;
 let page = 1;
 let infiiteScroll;
 
@@ -81,6 +82,7 @@ function categoriesPage () {
     headerCategoryTitle.innerHTML = categoryName;
 
     getMoviesByCategory(categoryId);
+    infiiteScroll = getPaginatedMoviesByCategory(categoryId);
 };
 function moviePage () {
     window.scrollTo(0, 0);
@@ -119,6 +121,7 @@ function searchPage () {
 
     const [_, query] = location.hash.split('=');
     getMoviesBySearch(query);
+    infiiteScroll = getPaginatedMoviesBySearch(query);
 };
 function trendesgchPage () {
     window.scrollTo(0, 0);

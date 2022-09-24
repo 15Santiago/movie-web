@@ -10,12 +10,12 @@ const lazyLoader = new IntersectionObserver((entries) => {
     });
 });
 
-function createMovies (movies, container, {lazyload = false, clean = true} = {}) {
+function createMovies (data, container, {lazyload = false, clean = true} = {}) {
     if (clean) {
         container.innerHTML = '';
     };
 
-    movies.forEach(movie => {
+    data.forEach(movie => {
         const imgContainer = document.createElement('div');
         const img = document.createElement('img');
         imgContainer.addEventListener('click', () => {
@@ -91,35 +91,71 @@ async function getMoviesByCategory (id) {
         const response = await fetch (`${API}/discover/movie?api_key=${API_Key}&&with_genres=${id}`);
         const data = await response.json();
         const movies = data.results;
+        maxPage = data.total_pages;
 
-        createMovies(movies, genericListSection, true);
+        createMovies(movies, genericListSection, {lazyload:true});
     } catch (error){
         console.log(error);
     }
+};
+function getPaginatedMoviesByCategory(id){
+    return async function () {
+        try {
+            const {scrollTop, scrollHeight, clientHeight} = document.documentElement;
+            const scrollIsBottom = (scrollTop + clientHeight) >= (scrollHeight - 15);
+            const pageIsNotMax = page < maxPage;
+            if (scrollIsBottom && pageIsNotMax) {
+                page++;
+                const response = await fetch(`${API}/discover/movie?api_key=${API_Key}&&with_genres=${id}&&page=${page}`);
+                const data = await response.json();
+                const movies = await data.results;
+    
+                createMovies(movies, genericListSection, {lazyload: true, clean: false});
+            }; 
+        } catch (error) {
+            console.log(error);
+        };        
+    };
 };
 async function getMoviesBySearch(query) {
     try {
         const response = await fetch (`${API}/search/movie?api_key=${API_Key}&&query=${query}`);
         const data = await response.json();
         const movies = data.results;
+        maxPage = data.total_pages;
 
-        createMovies(movies, genericListSection);
+        createMovies(movies, genericListSection, {lazyload: true});
     } catch (error){
         console.log(error);
     }
+};
+function getPaginatedMoviesBySearch(query){
+    return async function () {
+        try {
+            const {scrollTop, scrollHeight, clientHeight} = document.documentElement;
+            const scrollIsBottom = (scrollTop + clientHeight) >= (scrollHeight - 15);
+            const pageIsNotMax = page < maxPage;
+            if (scrollIsBottom && pageIsNotMax) {
+                page++;
+                const response = await fetch(`${API}/search/movie?api_key=${API_Key}&&query=${query}&&page=${page}`);
+                const data = await response.json();
+                const movies = await data.results;
+    
+                createMovies(movies, genericListSection, {lazyload: true, clean: false});
+            };
+        } catch (error) {
+            console.log(error);
+        };        
+    };
 };
 async function getTrendingMovies () {
     try {
         const response = await fetch (`${API}/trending/movie/week?api_key=${API_Key}`);
         const data = await response.json();
         const movies = data.results;
+        maxPage = data.total_pages;
 
         createMovies(movies, genericListSection, {lazyload: true, clean: true});
-
-        // const loadMoreBtn = document.createElement('button');
-        // loadMoreBtn.innerText = 'Caragar más';
-        // loadMoreBtn.addEventListener('click', getPaginatedTrendingMovies);
-        // genericListSection.appendChild(loadMoreBtn);
     } catch (error){
         console.log(error);
     }
@@ -128,7 +164,8 @@ async function getPaginatedTrendingMovies () {
     try {
         const {scrollTop, scrollHeight, clientHeight} = document.documentElement;
         const scrollIsBottom = (scrollTop + clientHeight) >= (scrollHeight - 15);
-        if (scrollIsBottom) {
+        const pageIsNotMax = page < maxPage;
+        if (scrollIsBottom && pageIsNotMax) {
             page++;
             const response = await fetch(`${API}/trending/movie/week?api_key=${API_Key}&&page=${page}`);
             const data = await response.json();
@@ -136,11 +173,6 @@ async function getPaginatedTrendingMovies () {
     
             createMovies(movies, genericListSection, {lazyload: true, clean: false});
         };
-
-        // const loadMoreBtn = document.createElement('button');
-        // loadMoreBtn.innerText = 'Caragar más';
-        // loadMoreBtn.addEventListener('click', getPaginatedTrendingMovies);
-        // genericListSection.appendChild(loadMoreBtn);
     } catch (error){
         console.log(error);
     }
