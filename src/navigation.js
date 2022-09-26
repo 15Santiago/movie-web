@@ -16,7 +16,7 @@ arrowBtn.addEventListener('click', () => {
 //Windows
 window.addEventListener('DOMContentLoaded', navigator, false);
 window.addEventListener('hashchange', navigator, false);
-window,addEventListener('scroll', infiiteScroll, false);
+window.addEventListener('scroll', infiiteScroll, false);
 
 function navigator () {
 
@@ -57,9 +57,11 @@ function homePage () {
     categoriesPreviewSection.classList.remove('inactive');
     genericListSection.classList.add('inactive');
     movieDetailSection.classList.add('inactive');
+    likedMoviesListSection.classList.remove('inactive');
 
     getTrendingMoviesPreview();
     getCategoriesPreview();
+    getLikedMovies();
 };
 function categoriesPage () {
     window.scrollTo(0, 0);
@@ -76,6 +78,7 @@ function categoriesPage () {
     categoriesPreviewSection.classList.add('inactive');
     genericListSection.classList.remove('inactive');
     movieDetailSection.classList.add('inactive');
+    likedMoviesListSection.classList.add('inactive');
 
     const [_, categoryData] = location.hash.split('=');
     const [categoryId, categoryName] = categoryData.split('-');
@@ -99,6 +102,7 @@ function moviePage () {
     categoriesPreviewSection.classList.add('inactive');
     genericListSection.classList.add('inactive');
     movieDetailSection.classList.remove('inactive');
+    likedMoviesListSection.classList.add('inactive');
 
     const [_, MvoieId] = location.hash.split('=');
     getMovieById(MvoieId);
@@ -118,6 +122,7 @@ function searchPage () {
     categoriesPreviewSection.classList.add('inactive');
     genericListSection.classList.remove('inactive');
     movieDetailSection.classList.add('inactive');
+    likedMoviesListSection.classList.add('inactive');
 
     const [_, query] = location.hash.split('=');
     getMoviesBySearch(query);
@@ -133,6 +138,7 @@ function trendesgchPage () {
     headerCategoryTitle.classList.add('inactive');
     headerTitle.classList.remove('inactive');
     searchForm.classList.add('inactive');
+    likedMoviesListSection.classList.add('inactive');
 
     trendingPreviewSection.classList.add('inactive');
     categoriesPreviewSection.classList.add('inactive');
