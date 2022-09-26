@@ -18,9 +18,6 @@ function createMovies (data, container, {lazyload = false, clean = true} = {}) {
     data.forEach(movie => {
         const imgContainer = document.createElement('div');
         const img = document.createElement('img');
-        imgContainer.addEventListener('click', () => {
-            location.hash = `#movie= ${movie.id}`;
-        });
 
         imgContainer.classList.add('movie-container');
         img.classList.add('movie-img');
@@ -29,6 +26,16 @@ function createMovies (data, container, {lazyload = false, clean = true} = {}) {
             lazyload ? 'data-img' : 'src', 
             `https://image.tmdb.org/t/p/w300/${movie.poster_path}`
         );
+        img.addEventListener('click', () => {
+            location.hash = `#movie= ${movie.id}`;
+        });
+
+        const movieBtn = document.createElement('button');
+        movieBtn.classList.add('movie-btn');
+        movieBtn.addEventListener('click', () => {
+            movieBtn.classList.toggle('movie-btn--liked');
+        });
+
         if (lazyload) {
             lazyLoader.observe(img);
         }
@@ -37,6 +44,7 @@ function createMovies (data, container, {lazyload = false, clean = true} = {}) {
         });
 
         imgContainer.appendChild(img);
+        imgContainer.appendChild(movieBtn);
         container.appendChild(imgContainer);
     });
 };
